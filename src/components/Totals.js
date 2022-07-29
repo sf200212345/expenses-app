@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState';
 
 const Totals = () => {
+  const allNumbers = useContext(GlobalContext).transactions.map(curr => curr.number);
+
+  const income = allNumbers.filter(curr => curr > 0).reduce((prev, curr) => prev + curr, 0).toFixed(2);
+  const expenses = Math.abs(allNumbers.filter(curr => curr < 0).reduce((prev, curr) => prev + curr, 0)).toFixed(2);
+
   return (
     <div className="totals">
         <div className="income">
             <h4>Income</h4>
-            <p id="money-in" className="money in">+$0.00</p>
+            <p className="money in">${income}</p>
         </div>
         <div className="expenses">
             <h4>Expenses</h4>
-            <p id="money-out" className="money out">-$0.00</p>
+            <p className="money out">${expenses}</p>
         </div>
     </div>
   )
