@@ -1,3 +1,4 @@
+/*app-wide*/
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,28 +11,123 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  font-family: sans-serif;
+  background-color: gainsboro;
 }
 
+.component {
+  max-width: 33vw;
+  margin: 20px 0;
+}
+
+/*Header*/
 h1 {
-  margin: 10px 0;
+  text-align: center;
 }
 
+/*Balance*/
+
+/*Totals*/
 .totals {
   margin: auto;
   display: flex;
   align-items: center;
-  width: 80%;
+  background-color: white;
 }
 
 .income, .expenses {
   display: inline-block;
   margin: 10px auto;
-  border: 1px solid black;
   padding: 5px;
   width: 25%;
   text-align: center;
 }
 
-.positive {
-  background-color: green;
+.money {
+  letter-spacing: 1px;
+}
+
+.in {
+  color: #48DD54;
+}
+
+.out {
+  color: red;
+}
+
+/*Transactions*/
+.history {
+  height: 25vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+/*TransactionItem*/
+.item {
+  background-color: white;
+  margin: 10px 0;
+  height: 2em;
+  list-style-type: none;
+}
+
+.item li {
+  width: 92%;
+  padding-left: 5px;
+}
+
+.item li, .btn {
+  display: inline-block;
+  line-height: 2em;
+}
+
+.item span, .btn {
+  float: right;
+}
+
+.btn {
+  border: none;
+  background-color: red;
+  color: white;
+  padding: 0 10px;
+  height: 100%;
+}
+
+.positive span {
+  color: #48DD54;
+}
+
+.negative span {
+  color: red;
+}
+
+.btn:hover {
+  color: black;
+  cursor: pointer;
+}
+
+/*AddTransactions*/
+form label, form input, form button {
+  display: block;
+  margin: 10px 0;
+  width: 100%;
+  border: none;
+}
+
+form input {
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+form input, form button {
+  height: 2em;
+}
+
+form button {
+  background-color: gray;
+  color: white;
+}
+
+form button:hover {
+  color: black;
+  cursor: pointer;
 }

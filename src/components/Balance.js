@@ -7,7 +7,7 @@ const Balance = () => {
   const total = transactions.map(curr => curr.number).reduce((prev, curr) => prev + curr, 0).toFixed(2);
   
   return (
-    <div>
+    <div className='component'>
         <h3>Current balance</h3>
         <h2>${total}</h2>
     </div>

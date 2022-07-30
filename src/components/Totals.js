@@ -8,7 +8,7 @@ const Totals = () => {
   const expenses = Math.abs(allNumbers.filter(curr => curr < 0).reduce((prev, curr) => prev + curr, 0)).toFixed(2);
 
   return (
-    <div className="totals">
+    <div className="totals component">
         <div className="income">
             <h4>Income</h4>
             <p className="money in">${income}</p>

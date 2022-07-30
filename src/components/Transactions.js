@@ -7,9 +7,9 @@ const Transactions = () => {
   const { transactions } = useContext(GlobalContext)
 
   return (
-    <div>
+    <div className='component'>
         <h3>Transaction History</h3>
-        <ul id="list">
+        <ul className='history'>
             {transactions.map((curr) => (<TransactionItem key={curr.id} info={curr} />))}
         </ul>
     </div>
