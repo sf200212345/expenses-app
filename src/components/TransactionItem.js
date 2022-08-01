@@ -14,7 +14,7 @@ const TransactionItem = ({ info }) => {
 
   return (
     <div className='item'>
-      <span className='freq'>{frequencies[info.text]}x</span>
+      <div className='freq'><span>{frequencies[info.text]}x</span></div>
       <li>
         {info.text}<span className={cls}>{sign}${Math.abs(info.number)}</span>
       </li>
