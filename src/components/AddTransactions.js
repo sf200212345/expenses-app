@@ -3,7 +3,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 const AddTransactions = () => {
 
-    const { addTransaction, nextID } = useContext(GlobalContext);
+    const { addTransaction, nextID, changeSort } = useContext(GlobalContext);
 
     const [text, setText] = useState("");
     const [number, setNumber] = useState("");
@@ -16,6 +16,7 @@ const AddTransactions = () => {
         text,
         number: +number
       })
+      changeSort("R");
     }
 
   return (
@@ -23,9 +24,9 @@ const AddTransactions = () => {
         <h3>Add Transactions</h3>
         <form onSubmit={submit}>
             <label htmlFor="text">Classify Transaction Type:</label>
-            <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Text..." />
+            <input type="text" id="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Text..." />
             <label htmlFor="number">Enter Amount (negative = expense, positive = income):</label>
-            <input type="number" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Enter Amount..." />
+            <input type="number" id="number" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Enter Amount..." />
             <button type="submit">Add</button>
         </form>
     </div>

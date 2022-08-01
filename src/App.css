@@ -70,8 +70,13 @@ h1 {
   list-style-type: none;
 }
 
+.freq {
+  padding-left: 5px;
+  
+}
+
 .item li {
-  width: 92%;
+  width: 80%;
   padding-left: 5px;
 }
 
@@ -80,7 +85,7 @@ h1 {
   line-height: 2em;
 }
 
-.item span, .btn {
+.positive, .negative, .btn {
   float: right;
 }
 
@@ -92,11 +97,11 @@ h1 {
   height: 100%;
 }
 
-.positive span {
+.positive {
   color: #48DD54;
 }
 
-.negative span {
+.negative {
   color: red;
 }
 
