@@ -132,7 +132,7 @@ h1 {
 }
 
 /*AddTransactions*/
-form label, form input, form button {
+form label, form input {
   display: block;
   margin: 10px 0;
   width: 100%;
@@ -149,11 +149,21 @@ form input, form button {
 }
 
 form button {
-  background-color: gray;
-  color: white;
+  background-color: rgb(117, 117, 117);
+  width: 35%;
+  display: inline-block;
+  border: none;
+  padding: 5px;
+  margin: 10px auto;
+}
+
+.btns {
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
 }
 
 form button:hover {
-  color: black;
+  color: white;
   cursor: pointer;
 }
