@@ -62,15 +62,29 @@ h1 {
   overflow-x: hidden;
 }
 
-.TH, .sortContainer {
+.s-header {
+  margin: 10px 0;
+}
+
+.TH, .t-container, .search {
   display: inline-block;
 }
 
-.sortContainer { 
+.t-container, .modes { 
   float: right;
 }
 
-.sortContainer select, .sortContainer label {
+.t-container label {
+  font-weight: bold;
+}
+
+.search {
+  width: 50%;
+  height: 2em;
+  padding-left: 5px;
+}
+
+.t-container select, .t-container label {
   border: none;
   background-color: inherit;
   font-size: 13px;
@@ -154,7 +168,7 @@ form button {
   display: inline-block;
   border: none;
   padding: 5px;
-  margin: 10px auto;
+  margin: auto;
 }
 
 .btns {
