@@ -98,24 +98,12 @@ h1 {
   list-style-type: none;
 }
 
-.freq {
-  background-color: grey;
-  height: 100%;
-  width: 40px;
-}
-
-.freq span {
-  display: flex;
-  justify-content: center;
-  color: white;
-}
-
 .item li {
-  width: 85%;
+  width: 90%;
   padding-left: 5px;
 }
 
-.item li, .btn, .freq {
+.item li, .btn {
   display: inline-block;
   line-height: 2em;
 }
@@ -143,6 +131,12 @@ h1 {
 .btn:hover {
   color: black;
   cursor: pointer;
+}
+
+/*AggregateItem*/
+.aggregateItem {
+  display: inline-block;
+  margin: auto 0;
 }
 
 /*AddTransactions*/

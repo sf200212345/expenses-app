@@ -1,34 +1,53 @@
 export const AppReducer = (state, action) => {
     switch(action.type) {
         case "DELETE":
-            let newFrequencies = state.frequencies;
-            if (newFrequencies[action.info.text] - 1 > 0) {
+            if (Object.keys(state.aggregate).length === 0) {
+                return {
+                    ...state,
+                    transactions: state.transactions.filter(curr => curr.id !== action.info.id)
+                }
+            }
+            else if (state.aggregate[action.info.text].count - 1 > 0) {
                 return {
                     ...state,
                     transactions: state.transactions.filter(curr => curr.id !== action.info.id),
-                    frequencies: {
-                        ...state.frequencies,
-                        [action.info.text]: state.frequencies[action.info.text] - 1
+                    aggregate: {
+                        ...state.aggregate,
+                        [action.info.text]: {
+                            ...state.aggregate[action.info.text],
+                            count: state.aggregate[action.info.text].count - 1,
+                            sum: state.aggregate[action.info.text].sum - action.info.number,
+                            average: ((state.aggregate[action.info.text].sum - action.info.number) / (state.aggregate[action.info.text].count - 1)).toFixed(2),
+                            min: Math.min(state.transactions.filter(curr => curr.id !== action.info.id).map(curr => curr.number)),
+                            max: Math.max(state.transactions.filter(curr => curr.id !== action.info.id).map(curr => curr.number))
+                        }
                     }
                 };
             }
             else {
-                delete newFrequencies[action.info.text];
+                delete state.aggregate[action.info.text];
                 return {
                     ...state,
                     transactions: state.transactions.filter(curr => curr.id !== action.info.id),
-                    frequencies: newFrequencies
+                    aggregate: state.aggregate
                 };
             }
         case "ADD":
-            if (state.frequencies.hasOwnProperty(action.info.text)) {
+            if (state.aggregate.hasOwnProperty(action.info.text)) {
                 return {
                     ...state,
                     transactions: [action.info, ...state.transactions],
                     nextID: state.nextID + 1,
-                    frequencies: {
-                        ...state.frequencies,
-                        [action.info.text]: state.frequencies[action.info.text] + 1,
+                    aggregate: {
+                        ...state.aggregate,
+                        [action.info.text]: {
+                            ...state.aggregate[action.info.text],
+                            count: state.aggregate[action.info.text].count + 1,
+                            sum: state.aggregate[action.info.text].sum + action.info.number,
+                            average: ((state.aggregate[action.info.text].sum + action.info.number) / (state.aggregate[action.info.text].count + 1)).toFixed(2),
+                            min: state.aggregate[action.info.text].min > action.info.number ? action.info.number : state.aggregate[action.info.text].min,
+                            max: state.aggregate[action.info.text].max < action.info.number ? action.info.number : state.aggregate[action.info.text].max
+                        }
                     }
                 };
             }
@@ -37,14 +56,21 @@ export const AppReducer = (state, action) => {
                     ...state,
                     transactions: [action.info, ...state.transactions],
                     nextID: state.nextID + 1,
-                    frequencies: {
-                        ...state.frequencies,
-                        [action.info.text]: 1
+                    aggregate: {
+                        ...state.aggregate,
+                        [action.info.text]: {
+                            count: 1,
+                            sum: action.info.number,
+                            average: action.info.number,
+                            max: action.info.number,
+                            min: action.info.number
+                        }
                     }
                 };
             }
         case "SORT":
             let newTransactions = state.transactions;
+            let newAggregateArr = Object.keys(state.aggregate);
             switch(action.newSort) {
                 case "MR":
                     newTransactions.sort((a, b) => b.id - a.id);
@@ -52,17 +78,41 @@ export const AppReducer = (state, action) => {
                 case "LR":
                     newTransactions.sort((a, b) => a.id - b.id);
                     break;
-                case "LS":
+                case "LtS":
                     newTransactions.sort((a, b) => b.number - a.number);
                     break;
-                case "SL":
+                case "StL":
                     newTransactions.sort((a, b) => a.number - b.number);
                     break;
-                case "MF":
-                    newTransactions.sort((a, b) => state.frequencies[b.text] - state.frequencies[a.text]);
+                case "LC":
+                    newAggregateArr.sort((a, b) => state.aggregate[b].count - state.aggregate[a].count);
                     break;
-                case "LF":
-                    newTransactions.sort((a, b) => state.frequencies[a.text] - state.frequencies[b.text]);
+                case "SC":
+                    newAggregateArr.sort((a, b) => state.aggregate[a].count - state.aggregate[b].count);
+                    break;
+                case "LS":
+                    newAggregateArr.sort((a, b) => state.aggregate[b].sum - state.aggregate[a].sum);
+                    break;
+                case "SS":
+                    newAggregateArr.sort((a, b) => state.aggregate[a].sum - state.aggregate[b].sum);
+                    break;
+                case "LA":
+                    newAggregateArr.sort((a, b) => state.aggregate[b].average - state.aggregate[a].average);
+                    break;
+                case "SA":
+                    newAggregateArr.sort((a, b) => state.aggregate[a].average - state.aggregate[b].average);
+                    break;
+                case "LM":
+                    newAggregateArr.sort((a, b) => state.aggregate[b].max - state.aggregate[a].max);
+                    break;
+                case "SM":
+                    newAggregateArr.sort((a, b) => state.aggregate[a].max - state.aggregate[b].max);
+                    break;
+                case "Lm":
+                    newAggregateArr.sort((a, b) => state.aggregate[b].min - state.aggregate[a].min);
+                    break;
+                case "Sm":
+                    newAggregateArr.sort((a, b) => state.aggregate[a].min - state.aggregate[b].min);
                     break;
                 default:
                     break;
@@ -70,6 +120,7 @@ export const AppReducer = (state, action) => {
             return {
                 ...state,
                 transactions: newTransactions,
+                aggregateArr: newAggregateArr,
                 sortBy: action.newSort
             };
         default:

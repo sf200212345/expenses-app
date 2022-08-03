@@ -4,8 +4,10 @@ import { AppReducer } from './AppReducer';
 const initialState = {
     nextID: 0,
     transactions: [],
-    frequencies: {},
-    sortBy: ""
+    //has props min, max, sum, average, count
+    aggregate: {},
+    aggregateArr: [],
+    sortBy: "MR"
 }
 
 export const GlobalContext = createContext(initialState);
@@ -43,7 +45,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     return (
-        <GlobalContext.Provider value={{transactions: state.transactions, nextID: state.nextID, frequencies: state.frequencies, deleteTransaction, addTransaction, changeSort}}>
+        <GlobalContext.Provider value={{transactions: state.transactions, nextID: state.nextID, aggregate: state.aggregate, aggregateArr: state.aggregateArr, deleteTransaction, addTransaction, changeSort}}>
             {children}
         </GlobalContext.Provider>
     );

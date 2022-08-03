@@ -10,7 +10,6 @@ const AddTransactions = () => {
 
     const submit = e => {
       e.preventDefault();
-      console.log(e.nativeEvent.submitter.value);
       if (e.nativeEvent.submitter.value === "income") {
         addTransaction({
           id: nextID,

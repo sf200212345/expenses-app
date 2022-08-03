@@ -2,13 +2,23 @@ import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
 import TransactionItem from './TransactionItem';
-import FrequencyItem from './FrequencyItem';
+import AggregateItem from './AggregateItem';
 
 const Transactions = () => {
-  const { transactions, changeSort } = useContext(GlobalContext);
+  const { transactions, aggregateArr, changeSort } = useContext(GlobalContext);
 
   const [searchText, setSearchText] = useState("");
   const [mode, setMode] = useState("A");
+
+  const changeMode = (e) => {
+    if (e.target.value === "A") {
+      changeSort("MR");
+    }
+    else {
+      changeSort("LC");
+    }
+    setMode(e.target.value);
+  };
 
   return (
     <div className='component'>
@@ -16,9 +26,9 @@ const Transactions = () => {
           <h3 className='TH'>Transaction History</h3>
           <div className='t-container'>
             <label htmlFor='modes'>View Transactions by:</label>
-            <select id="modes" onChange={(e) => setMode(e.target.value)}>
+            <select id="modes" onChange={changeMode}>
               <option value="A">Amount</option>
-              <option value="F">Frequency</option>
+              <option value="Agg">Aggregate</option>
             </select>
           </div>
         </div>
@@ -26,15 +36,24 @@ const Transactions = () => {
           <input className='search' type="text" placeholder='Search Transactions...' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
           <div className='t-container'>
             <label htmlFor='sort'>Sort by:</label>
-            {/*make sure the sorting is consistent as you change from amount to frequency and vice versa*/}
+            {/*figure out how to make default sort show up*/}
             <select id="sort" onChange={(e) => changeSort(e.target.value)}>
               {mode === "A"
                 ? <><option value="MR">Most Recent</option>
                   <option value="LR">Least Recent</option>
-                  <option value="LS">Largest to Smallest</option>
-                  <option value="SL">Smallest to Largest</option></>
-                : <><option value="MF">Most Frequent</option>
-                  <option value="LF">Least Frequent</option></>
+                  <option value="LtS">Largest to Smallest</option>
+                  <option value="StL">Smallest to Largest</option></>
+                : <><option value="LC">Largest Count</option>
+                  <option value="SC">Smallest Count</option>
+                  <option value="LS">Largest Sum</option>
+                  <option value="SS">Smallest Sum</option>
+                  <option value="LA">Largest Average</option>
+                  <option value="SA">Smallest Average</option>
+                  <option value="LM">Largest Max</option>
+                  <option value="SM">Smallest Max</option>
+                  <option value="Lm">Largest Min</option>
+                  <option value="Sm">Smallest Min</option>
+                  </>
               }
             </select>
           </div>
@@ -42,7 +61,7 @@ const Transactions = () => {
         <ul className='history'>
           {mode === "A"
             ? transactions.filter((curr) => curr.text.includes(searchText)).map((curr) => (<TransactionItem key={curr.id} info={curr} />))
-            : <span>hi</span>
+            : aggregateArr.filter((curr) => curr.includes(searchText)).map((curr) => (<AggregateItem key={curr} text={curr} />))
           } 
         </ul>
     </div>
