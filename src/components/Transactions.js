@@ -36,14 +36,14 @@ const Transactions = () => {
           <input className='search' type="text" placeholder='Search Transactions...' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
           <div className='t-container'>
             <label htmlFor='sort'>Sort by:</label>
-            {/*figure out how to make default sort show up*/}
             <select id="sort" onChange={(e) => changeSort(e.target.value)}>
               {mode === "A"
-                ? <><option value="MR">Most Recent</option>
+                ? <><option value="LtS">Largest to Smallest</option>
+                  <option value="StL">Smallest to Largest</option>
+                  <option value="MR" selected>Most Recent</option>
                   <option value="LR">Least Recent</option>
-                  <option value="LtS">Largest to Smallest</option>
-                  <option value="StL">Smallest to Largest</option></>
-                : <><option value="LC">Largest Count</option>
+                  </>
+                : <><option selected value="LC">Largest Count</option>
                   <option value="SC">Smallest Count</option>
                   <option value="LS">Largest Sum</option>
                   <option value="SS">Smallest Sum</option>

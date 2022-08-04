@@ -1,7 +1,7 @@
 export const AppReducer = (state, action) => {
     switch(action.type) {
         case "DELETE":
-            if (Object.keys(state.aggregate).length === 0) {
+            if (!state.aggregate.hasOwnProperty(action.info.text)) {
                 return {
                     ...state,
                     transactions: state.transactions.filter(curr => curr.id !== action.info.id)

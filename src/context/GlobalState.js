@@ -4,7 +4,7 @@ import { AppReducer } from './AppReducer';
 const initialState = {
     nextID: 0,
     transactions: [],
-    //has props min, max, sum, average, count
+    //has props min, max, sum, average, count for each prop
     aggregate: {},
     aggregateArr: [],
     sortBy: "MR"
