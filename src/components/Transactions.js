@@ -33,7 +33,7 @@ const Transactions = () => {
           </div>
         </div>
         <div className='s-header'>
-          <input className='search' type="text" placeholder='Search Transactions...' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+          <input className='search' type="text" placeholder='Search Transactions...' value={searchText} onChange={(e) => setSearchText(e.target.value)} autoComplete="off" />
           <div className='t-container'>
             <label htmlFor='sort'>Sort by:</label>
             <select id="sort" onChange={(e) => changeSort(e.target.value)}>
