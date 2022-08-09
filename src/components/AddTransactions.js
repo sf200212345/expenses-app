@@ -31,11 +31,11 @@ const AddTransactions = () => {
   return (
     <div className='component'>
         <h3>Add Transactions</h3>
-        <form onSubmit={submit} autoComplete="off">
+        <form onSubmit={submit} autoComplete="off" >
             <label htmlFor="text">Classify Transaction Type:</label>
-            <input type="text" required id="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Text..." onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} />
+            <input type="text" required id="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Text..." onFocus={() => setFocus(true)} />
             <ul className='suggestions'>
-              {text === "" || !isFocused ? <></> : aggregateArr.filter(curr => curr.includes(text)).map(curr => (<li><button type="button" value={curr} className="suggestion-btn" onClick={(e) => setText(e.target.value)}>{curr}</button></li>))}
+              {text !== "" && isFocused ? aggregateArr.filter(curr => curr.includes(text)).map(curr => (<li key={curr}><button type="button" className="suggestion-btn" onClick={() => {setText(curr);setFocus(false);}}>{curr}</button></li>)) : (<></>)}
             </ul>
             <label htmlFor="number">Enter Amount:</label>
             <input type="number" required id="number" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Enter Amount..." />
