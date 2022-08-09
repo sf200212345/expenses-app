@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const AddTransactions = () => {
 
@@ -33,10 +34,18 @@ const AddTransactions = () => {
         <h3>Add Transactions</h3>
         <form onSubmit={submit} autoComplete="off" >
             <label htmlFor="text">Classify Transaction Type:</label>
-            <input type="text" required id="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Text..." onFocus={() => setFocus(true)} />
-            <ul className='suggestions'>
-              {text !== "" && isFocused ? aggregateArr.filter(curr => curr.includes(text)).map(curr => (<li key={curr}><button type="button" className="suggestion-btn" onClick={() => {setText(curr);setFocus(false);}}>{curr}</button></li>)) : (<></>)}
-            </ul>
+            <OutsideClickHandler onOutsideClick={() => setFocus(false)}>
+              <input type="text" required id="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Text..." onFocus={() => setFocus(true)} />
+              <div className='suggestions-container'>
+                {text !== "" && isFocused
+                  ? (<ul className='suggestions'>
+                      {aggregateArr.filter(curr => curr.includes(text)).map(curr => (<li key={curr}>
+                                                                                      <button type="button" className="suggestion-btn" onClick={() => {setText(curr);setFocus(false);}}>{curr}</button>
+                                                                                    </li>))}
+                    </ul>)
+                  : (<></>)}
+              </div>
+            </OutsideClickHandler>
             <label htmlFor="number">Enter Amount:</label>
             <input type="number" required id="number" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Enter Amount..." />
             <div className="btns">

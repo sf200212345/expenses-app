@@ -12,7 +12,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   font-family: sans-serif;
-  background-color: gainsboro;
+  background-color: rgb(211, 211, 211);
 }
 
 .component {
@@ -160,7 +160,7 @@ h1 {
 }
 
 .stats {
-  background-color: rgb(117, 117, 117);
+  background-color: #e7e7e7;;
   line-height: 4em;
   padding-left: 15px;
 }
@@ -169,17 +169,28 @@ h1 {
   line-height: 1em;
 }
 
-.lbl {
+.lbl, .stat-item .in, .stat-item .out {
   font-size: 12px;
-  color: white;
+}
+
+.lbl {
+  color: black;
+  display: inline-block;
+  width: 10%;
+}
+
+.count {
+  width: fit-content;
+  display: inline;
 }
 
 .right {
   float: right;
 }
 
-.right .lbl {
-  color: black;
+.invisible {
+  float: right;
+  color: #e7e7e7;;
 }
 
 /*AddTransactions*/
@@ -188,6 +199,10 @@ form label, form input {
   margin: 10px 0;
   width: 100%;
   border: none;
+}
+
+form label:last-of-type {
+  margin-top: 40px;
 }
 
 form input {
@@ -200,7 +215,7 @@ form input, .submit-btn {
 }
 
 .submit-btn {
-  background-color: rgb(117, 117, 117);
+  background-color: #e7e7e7;
   width: 35%;
   display: inline-block;
   border: none;
@@ -214,19 +229,39 @@ form input, .submit-btn {
   align-items: center;
 }
 
-.submit-btn:hover {
-  color: white;
-  cursor: pointer;
-}
-
 .suggestions {
   position: absolute;
   margin: 0;
   overflow-y: scroll;
   z-index: 99;
+  width: 100%;
+  max-height: 5em;
 }
 
 .suggestions li {
+  display: inline;
   margin: 0;
+  width: 100%;
+  height: 2em;
 }
 
+.suggestion-btn {
+  border: none;
+  margin: 0;
+  width: 100%;
+  line-height: 2em;
+  text-align: left;
+  padding-left: 5px;
+  background-color: #e7e7e7;
+}
+
+.suggestion-btn:hover, .submit-btn:hover {
+  background-color: rgb(117, 117, 117);
+  color: white;
+  cursor: pointer;
+}
+
+.suggestions-container {
+  position: relative;
+  margin-top: -20px;
+}
