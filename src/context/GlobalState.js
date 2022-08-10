@@ -7,6 +7,7 @@ const initialState = {
     //has props min, max, sum, average, count for each prop
     aggregate: {},
     aggregateArr: [],
+    alphabetSorted: [],
     sortBy: "MR"
 }
 
@@ -45,7 +46,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     return (
-        <GlobalContext.Provider value={{transactions: state.transactions, nextID: state.nextID, aggregate: state.aggregate, aggregateArr: state.aggregateArr, deleteTransaction, addTransaction, changeSort}}>
+        <GlobalContext.Provider value={{transactions: state.transactions, nextID: state.nextID, aggregate: state.aggregate, aggregateArr: state.aggregateArr, alphabetSorted: state.alphabetSorted, deleteTransaction, addTransaction, changeSort}}>
             {children}
         </GlobalContext.Provider>
     );

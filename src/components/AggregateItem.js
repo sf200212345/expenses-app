@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
-const AggregateItem = ({ text }) => {
+const AggregateItem = ({ text, length }) => {
     const { aggregate } = useContext(GlobalContext);
 
   return (
-    <div className='item large'>
+    <div className='item large rounded'>
       <li>
         <div className="item-header">
-          {text}
+        <span className='bold'>{text.slice(0, length)}</span>{text.slice(length)}
           <div className='right'>
             <span className='lbl count'>Count: </span>{aggregate[text].count}
           </div>

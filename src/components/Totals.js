@@ -8,7 +8,7 @@ const Totals = () => {
   const expenses = Math.abs(allNumbers.filter(curr => curr < 0).reduce((prev, curr) => prev + curr, 0));
 
   return (
-    <div className="totals component">
+    <div className="totals component rounded">
         <div className="income">
             <h4>Income</h4>
             <p className="money in">${income.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>

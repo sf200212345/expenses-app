@@ -4,7 +4,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 const AddTransactions = () => {
 
-    const { addTransaction, nextID, changeSort, aggregateArr } = useContext(GlobalContext);
+    const { addTransaction, nextID, changeSort, alphabetSorted } = useContext(GlobalContext);
 
     const [text, setText] = useState("");
     const [number, setNumber] = useState("");
@@ -35,22 +35,22 @@ const AddTransactions = () => {
         <form onSubmit={submit} autoComplete="off" >
             <label htmlFor="text">Classify Transaction Type:</label>
             <OutsideClickHandler onOutsideClick={() => setFocus(false)}>
-              <input type="text" required id="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Text..." onFocus={() => setFocus(true)} />
+              <input type="text" className='rounded focused' required id="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Transaction Type..." onFocus={() => setFocus(true)} />
               <div className='suggestions-container'>
                 {text !== "" && isFocused
                   ? (<ul className='suggestions'>
-                      {aggregateArr.filter(curr => curr.includes(text)).map(curr => (<li key={curr}>
-                                                                                      <button type="button" className="suggestion-btn" onClick={() => {setText(curr);setFocus(false);}}>{curr}</button>
+                      {alphabetSorted.filter(curr => curr.toLowerCase().startsWith(text.toLowerCase())).map(curr => (<li key={curr}>
+                                                                                      <button type="button" className="suggestion-btn" onClick={() => {setText(curr);setFocus(false);}}><span className='bold'>{curr.slice(0, text.length)}</span>{curr.slice(text.length)}</button>
                                                                                     </li>))}
                     </ul>)
                   : (<></>)}
               </div>
             </OutsideClickHandler>
             <label htmlFor="number">Enter Amount:</label>
-            <input type="number" required id="number" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Enter Amount..." />
+            <input type="number" className='rounded' required id="number" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Enter Amount..." />
             <div className="btns">
-              <button className='in submit-btn' type="submit" value="income">Add as Income</button>
-              <button className="out submit-btn" type="submit" value="expense">Add as Expense</button>
+              <button className='in submit-btn rounded' type="submit" value="income">Add as Income</button>
+              <button className="out submit-btn rounded" type="submit" value="expense">Add as Expense</button>
             </div>
         </form>
     </div>

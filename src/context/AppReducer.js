@@ -71,6 +71,7 @@ export const AppReducer = (state, action) => {
         case "SORT":
             let newTransactions = state.transactions;
             let newAggregateArr = Object.keys(state.aggregate);
+            let newAlphabetSorted = Object.keys(state.aggregate);
             switch(action.newSort) {
                 case "MR":
                     newTransactions.sort((a, b) => b.id - a.id);
@@ -83,6 +84,10 @@ export const AppReducer = (state, action) => {
                     break;
                 case "StL":
                     newTransactions.sort((a, b) => a.number - b.number);
+                    break;
+                case "AAlpha":
+                    //need to change this
+                    newTransactions.sort((a, b) => a.text.toLowerCase() < b.text.toLowerCase() ? -1 : a.text.toLowerCase() > b.text.toLowerCase() ? 1 : 0);
                     break;
                 case "LC":
                     newAggregateArr.sort((a, b) => state.aggregate[b].count - state.aggregate[a].count);
@@ -114,6 +119,10 @@ export const AppReducer = (state, action) => {
                 case "Sm":
                     newAggregateArr.sort((a, b) => state.aggregate[a].min - state.aggregate[b].min);
                     break;
+                case "AAgg":
+                    //need to check if this works with capital letters
+                    newAggregateArr.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0);
+                    break;
                 default:
                     break;
             }
@@ -121,6 +130,7 @@ export const AppReducer = (state, action) => {
                 ...state,
                 transactions: newTransactions,
                 aggregateArr: newAggregateArr,
+                alphabetSorted: newAlphabetSorted.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0),
                 sortBy: action.newSort
             };
         default:

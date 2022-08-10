@@ -12,7 +12,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   font-family: sans-serif;
-  background-color: rgb(211, 211, 211);
+  background-color: #eadac5;
 }
 
 .component {
@@ -57,6 +57,7 @@ h1 {
 
 /*Transactions*/
 .history {
+  margin-top: 35px;
   height: 25vh;
   overflow: scroll;
   overflow-x: hidden;
@@ -83,6 +84,11 @@ h1 {
   height: 2em;
   padding-left: 5px;
   border: none;
+}
+
+.search-suggestions {
+  width: 50%;
+  top: 20px;
 }
 
 .t-container select, .t-container label {
@@ -124,6 +130,7 @@ h1 {
 .btn {
   border: none;
   background-color: red;
+  border-radius: 0px 5px 5px 0px;
   color: white;
   padding: 0 10px;
   height: 100%;
@@ -138,7 +145,7 @@ h1 {
 }
 
 .btn:hover {
-  color: black;
+  color: rgb(117, 117, 117);
   cursor: pointer;
 }
 
@@ -163,6 +170,7 @@ h1 {
   background-color: #e7e7e7;;
   line-height: 4em;
   padding-left: 15px;
+  border-radius: 0 0 5px 5px;
 }
 
 .stat-item {
@@ -230,6 +238,19 @@ form input, .submit-btn {
   margin: auto;
 }
 
+.submit-btn:hover {
+  background-color: rgb(117, 117, 117);
+  cursor: pointer;
+}
+
+.btns .in {
+  border: 1px solid #48DD54;
+}
+
+.btns .out {
+  border: 1px solid red;
+}
+
 .btns {
   margin: 10px auto;
   display: flex;
@@ -243,6 +264,9 @@ form input, .submit-btn {
   z-index: 99;
   width: 100%;
   max-height: 5em;
+  border-radius: 0 0 0 5px;
+  border: 1px solid black;
+  border-top: none;
 }
 
 .suggestions li {
@@ -262,13 +286,25 @@ form input, .submit-btn {
   background-color: #e7e7e7;
 }
 
-.suggestion-btn:hover, .submit-btn:hover {
+.suggestion-btn:hover {
   background-color: rgb(117, 117, 117);
   color: white;
   cursor: pointer;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .suggestions-container {
   position: relative;
   margin-top: -20px;
+}
+
+.rounded {
+  border-radius: 5px;
+}
+
+.focused:focus {
+  border-radius: 5px 5px 0 0;
 }

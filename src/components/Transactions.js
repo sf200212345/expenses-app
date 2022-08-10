@@ -1,14 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 import TransactionItem from './TransactionItem';
 import AggregateItem from './AggregateItem';
 
 const Transactions = () => {
-  const { transactions, aggregateArr, changeSort } = useContext(GlobalContext);
+  const { transactions, aggregateArr, changeSort, alphabetSorted } = useContext(GlobalContext);
 
   const [searchText, setSearchText] = useState("");
   const [mode, setMode] = useState("A");
+  const [isFocused, setFocus] = useState(false);
 
   const changeMode = (e) => {
     if (e.target.value === "A") {
@@ -33,7 +35,18 @@ const Transactions = () => {
           </div>
         </div>
         <div className='s-header'>
-          <input className='search' type="text" placeholder='Search Transactions...' value={searchText} onChange={(e) => setSearchText(e.target.value)} autoComplete="off" />
+          <OutsideClickHandler onOutsideClick={() => setFocus(false)}>
+            <input className='search rounded focused' type="text" placeholder='Search Transactions...' value={searchText} onChange={(e) => setSearchText(e.target.value)} autoComplete="off" onFocus={() => setFocus(true)} />
+            <div className='suggestions-container search-suggestions'>
+                {searchText !== "" && isFocused
+                  ? (<ul className='suggestions'>
+                      {alphabetSorted.filter(curr => curr.toLowerCase().startsWith(searchText.toLowerCase())).map(curr => (<li key={curr}>
+                                                                                      <button type="button" className="suggestion-btn" onClick={() => {setSearchText(curr);setFocus(false);}}><span className='bold'>{curr.slice(0, searchText.length)}</span>{curr.slice(searchText.length)}</button>
+                                                                                    </li>))}
+                    </ul>)
+                  : (<></>)}
+              </div>
+          </OutsideClickHandler>
           <div className='t-container'>
             <label htmlFor='sort'>Sort by:</label>
             <select id="sort" onChange={(e) => changeSort(e.target.value)}>
@@ -42,6 +55,7 @@ const Transactions = () => {
                   <option value="StL">Smallest to Largest</option>
                   <option value="MR" selected>Most Recent</option>
                   <option value="LR">Least Recent</option>
+                  <option value="AAlpha">Alphabet</option>
                   </>
                 : <><option selected value="LC">Largest Count</option>
                   <option value="SC">Smallest Count</option>
@@ -53,6 +67,7 @@ const Transactions = () => {
                   <option value="SM">Smallest Max</option>
                   <option value="Lm">Largest Min</option>
                   <option value="Sm">Smallest Min</option>
+                  <option value="AAgg">Alphabet</option>
                   </>
               }
             </select>
@@ -60,8 +75,8 @@ const Transactions = () => {
         </div>
         <ul className='history'>
           {mode === "A"
-            ? transactions.filter((curr) => curr.text.includes(searchText)).map((curr) => (<TransactionItem key={curr.id} info={curr} />))
-            : aggregateArr.filter((curr) => curr.includes(searchText)).map((curr) => (<AggregateItem key={curr} text={curr} />))
+            ? transactions.filter((curr) => curr.text.toLowerCase().startsWith(searchText.toLowerCase())).map((curr) => (<TransactionItem key={curr.id} info={curr} length={searchText.length} />))
+            : aggregateArr.filter((curr) => curr.toLowerCase().startsWith(searchText.toLowerCase())).map((curr) => (<AggregateItem key={curr} text={curr} length={searchText.length} />))
           } 
         </ul>
     </div>
