@@ -16,7 +16,7 @@ body {
 }
 
 .component {
-  max-width: 33vw;
+  max-width: max(500px, 33vw);
   margin: 20px 0;
 }
 
@@ -173,6 +173,12 @@ h1 {
   font-size: 12px;
 }
 
+.number-wrapper {
+  text-align: right;
+  display: inline-block;
+  width: 25%;
+}
+
 .lbl {
   color: black;
   display: inline-block;
@@ -190,7 +196,8 @@ h1 {
 
 .invisible {
   float: right;
-  color: #e7e7e7;;
+  color: #e7e7e7;
+  user-select: none;
 }
 
 /*AddTransactions*/

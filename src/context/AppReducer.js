@@ -17,7 +17,7 @@ export const AppReducer = (state, action) => {
                             ...state.aggregate[action.info.text],
                             count: state.aggregate[action.info.text].count - 1,
                             sum: state.aggregate[action.info.text].sum - action.info.number,
-                            average: ((state.aggregate[action.info.text].sum - action.info.number) / (state.aggregate[action.info.text].count - 1)).toFixed(2),
+                            average: (state.aggregate[action.info.text].sum - action.info.number) / (state.aggregate[action.info.text].count - 1),
                             min: Math.min(state.transactions.filter(curr => curr.id !== action.info.id).map(curr => curr.number)),
                             max: Math.max(state.transactions.filter(curr => curr.id !== action.info.id).map(curr => curr.number))
                         }
@@ -44,7 +44,7 @@ export const AppReducer = (state, action) => {
                             ...state.aggregate[action.info.text],
                             count: state.aggregate[action.info.text].count + 1,
                             sum: state.aggregate[action.info.text].sum + action.info.number,
-                            average: ((state.aggregate[action.info.text].sum + action.info.number) / (state.aggregate[action.info.text].count + 1)).toFixed(2),
+                            average: (state.aggregate[action.info.text].sum + action.info.number) / (state.aggregate[action.info.text].count + 1),
                             min: state.aggregate[action.info.text].min > action.info.number ? action.info.number : state.aggregate[action.info.text].min,
                             max: state.aggregate[action.info.text].max < action.info.number ? action.info.number : state.aggregate[action.info.text].max
                         }

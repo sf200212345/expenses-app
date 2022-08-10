@@ -15,7 +15,7 @@ const TransactionItem = ({ info }) => {
   return (
     <div className='item'>
       <li>
-        {info.text}<span className={cls}>{sign}${Math.abs(info.number)}</span>
+        {info.text}<span className={cls}>{sign}${Math.abs(info.number).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
       </li>
       <button className='btn' onClick={clicked}>X</button>
     </div>
