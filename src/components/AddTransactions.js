@@ -36,7 +36,7 @@ const AddTransactions = () => {
             <label htmlFor="text">Classify Transaction Type:</label>
             <OutsideClickHandler onOutsideClick={() => setFocus(false)}>
               <input type="text" className='rounded focused' required id="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter Transaction Type..." onFocus={() => setFocus(true)} />
-              <div className='suggestions-container'>
+              <div className='suggestions-container second'>
                 {text !== "" && isFocused
                   ? (<ul className='suggestions'>
                       {alphabetSorted.filter(curr => curr.toLowerCase().startsWith(text.toLowerCase())).map(curr => (<li key={curr}>

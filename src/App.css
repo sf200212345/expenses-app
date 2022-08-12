@@ -238,9 +238,15 @@ form input, .submit-btn {
   margin: auto;
 }
 
-.submit-btn:hover {
+@media only screen and (min-width: 1200px) {
+  .submit-btn:hover {
+    background-color: rgb(117, 117, 117);
+    cursor: pointer;
+  }
+}
+
+.submit-btn:active {
   background-color: rgb(117, 117, 117);
-  cursor: pointer;
 }
 
 .btns .in {
@@ -307,4 +313,50 @@ form input, .submit-btn {
 
 .focused:focus {
   border-radius: 5px 5px 0 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .t-container select {
+    font-size: 11px;
+  }
+  
+  .t-container label {
+    font-size: 8px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .component {
+    max-width: 95vw;
+  }
+}
+
+@media only screen and (max-height: 790px) {
+  .component {
+    margin: 10px 0;
+  }
+  
+  .s-header {
+    margin: 5px 0;
+  }
+
+  form label, form input {
+    margin: 5px 0;
+  }
+  
+  form label:last-of-type {
+    margin-top: 30px;
+  }
+
+  .second {
+    margin-top: -20px;
+  }
+  
+  form input {
+    margin-bottom: 10px;
+  }
+
+  form input:last-of-type {
+    margin-bottom: 20px;
+  }
 }
