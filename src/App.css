@@ -20,6 +20,10 @@ body {
   margin: 20px 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 /*Header*/
 h1 {
   text-align: center;
