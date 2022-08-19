@@ -9,10 +9,11 @@ const AddTransactions = () => {
     const [text, setText] = useState("");
     const [number, setNumber] = useState("");
     const [isFocused, setFocus] = useState(false);
+    const [submitter, setSubmitter] = useState("");
 
     const submit = e => {
       e.preventDefault();
-      if (e.nativeEvent.submitter.value === "income") {
+      if (submitter === "income") {
         addTransaction({
           id: nextID,
           text,
@@ -49,8 +50,8 @@ const AddTransactions = () => {
             <label htmlFor="number">Enter Amount:</label>
             <input type="number" className='rounded' required id="number" value={number} onChange={(e) => setNumber(e.target.value)} placeholder="Enter Amount..." />
             <div className="btns">
-              <button className='in submit-btn rounded' type="submit" value="income">Add as Income</button>
-              <button className="out submit-btn rounded" type="submit" value="expense">Add as Expense</button>
+              <button className='in submit-btn rounded' type="submit" name="submit-btn" value="income" onClick={() => setSubmitter("income")}>Add as Income</button>
+              <button className="out submit-btn rounded" type="submit" name="submit-btn" value="expense" onClick={() => setSubmitter("expense")}>Add as Expense</button>
             </div>
         </form>
     </div>
